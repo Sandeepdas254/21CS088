@@ -1,0 +1,50 @@
+
+function isPrime(num) {
+    if (num <= 1) return false;
+    if (num <= 3) return true;
+    if (num % 2 === 0 || num % 3 === 0) return false;
+    for (let i = 5; i * i <= num; i += 6) {
+        if (num % i === 0 || num % (i + 2) === 0) return false;
+    }
+    return true;
+}
+
+
+const inputData = {
+    companyName: "DR.NGP.IT",
+    ownerName: "Sandeep das P",
+    rollNo: "21CS088",
+    ownerEmail: "sandeepdasp@drngpit.ac.in",
+    accessCode: "iubwwE"
+};
+
+
+function generateQualifiedIDs(inputData) {
+    const qualifiedIDs = {};
+    
+
+    qualifiedIDs.prime = [];
+    for (let i = 2; i <= 100; i++) {
+        if (isPrime(i)) {
+            qualifiedIDs.prime.push(`${inputData.rollNo}-p${i}`);
+        }
+    }
+    
+    qualifiedIDs.even = [];
+    for (let i = 2; i <= 100; i += 2) {
+        qualifiedIDs.even.push(`${inputData.rollNo}-e${i}`);
+    }
+    
+    
+    qualifiedIDs.random = [];
+    for (let i = 0; i < 10; i++) {
+        const randomNum = Math.floor(Math.random() * 100) + 1;
+        qualifiedIDs.random.push(`${inputData.rollNo}-r${randomNum}`);
+    }
+    
+    return qualifiedIDs;
+}
+
+
+const generatedIDs = generateQualifiedIDs(inputData);
+console.log('Generated Qualified IDs:', generatedIDs);
